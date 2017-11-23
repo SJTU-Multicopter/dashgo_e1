@@ -1,4 +1,4 @@
-Dashgo D1 16.04
+Dashgo E1 16.04
 
 Version:v2.0
 
