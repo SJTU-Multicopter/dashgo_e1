@@ -1,2 +1,5 @@
-# dashgo_e1
-The dashgo package of E1 for someone who only buy the E1 !
+Dashgo E1 14.04
+
+Version:v2.0
+
+Date:2017-11-23
