@@ -1,0 +1,8 @@
+<launch>
+  <!-- start e1-car driver node -->
+  <param name="/use_sim_time" value="false" />
+  <node name="car" pkg="dashgo_driver" type="dashgo_driver.py" output="screen" respawn="true">
+    <rosparam file="$(find dashgo_driver)/config/my_dashgo_params.yaml" command="load" />
+  </node>
+
+</launch>

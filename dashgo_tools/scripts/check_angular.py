@@ -42,8 +42,9 @@ class CalibrateAngular():
         self.start_test = rospy.get_param('~start_test', True)
         
         # Publisher to control the robot's speed
-        self.cmd_vel = rospy.Publisher('/cmd_vel', Twist, queue_size=5)
- 
+        # self.cmd_vel = rospy.Publisher('/cmd_vel', Twist, queue_size=5)
+        self.cmd_vel = rospy.Publisher('/smoother_cmd_vel', Twist, queue_size=5)
+
         # The base frame is usually base_link or base_footprint
         self.base_frame = rospy.get_param('~base_frame', '/base_footprint')
 

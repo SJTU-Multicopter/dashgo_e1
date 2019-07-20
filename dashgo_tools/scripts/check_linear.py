@@ -25,7 +25,8 @@ class CalibrateLinear():
         self.start_test = rospy.get_param('~start_test', True)
         
         # Publisher to control the robot's speed
-        self.cmd_vel = rospy.Publisher('/cmd_vel', Twist, queue_size=5)
+        # self.cmd_vel = rospy.Publisher('/cmd_vel', Twist, queue_size=5)
+        self.cmd_vel = rospy.Publisher('/smoother_cmd_vel', Twist, queue_size=5)
         
  
         # The base frame is base_footprint for the TurtleBot but base_link for Pi Robot

@@ -421,23 +421,23 @@ class BaseController:
         self.arduino.reset_encoders()
         
         # Set up the odometry broadcaster
-        self.odomPub = rospy.Publisher('odom', Odometry, queue_size=5)
+        self.odomPub = rospy.Publisher('/car/odom', Odometry, queue_size=5)
         self.odomBroadcaster = TransformBroadcaster()
         
         rospy.loginfo("Started base controller for a base of " + str(self.wheel_track) + "m wide with " + str(self.encoder_resolution) + " ticks per rev")
         rospy.loginfo("Publishing odometry data at: " + str(self.rate) + " Hz using " + str(self.base_frame) + " as base frame")
 
-        self.lEncoderPub = rospy.Publisher('Lencoder', Int16, queue_size=5)
-        self.rEncoderPub = rospy.Publisher('Rencoder', Int16, queue_size=5)
-        self.lVelPub = rospy.Publisher('Lvel', Int16, queue_size=5)
-        self.rVelPub = rospy.Publisher('Rvel', Int16, queue_size=5)
+        self.lEncoderPub = rospy.Publisher('car/Lencoder', Int16, queue_size=5)
+        self.rEncoderPub = rospy.Publisher('car/Rencoder', Int16, queue_size=5)
+        self.lVelPub = rospy.Publisher('car/Lvel', Int16, queue_size=5)
+        self.rVelPub = rospy.Publisher('car/Rvel', Int16, queue_size=5)
 
         ## sonar 
-        self.sonar0_pub = rospy.Publisher('sonar0', Range, queue_size=5)
-        self.sonar1_pub = rospy.Publisher('sonar1', Range, queue_size=5)
-        self.sonar2_pub = rospy.Publisher('sonar2', Range, queue_size=5)
-        self.sonar3_pub = rospy.Publisher('sonar3', Range, queue_size=5)
-        self.sonar4_pub = rospy.Publisher('sonar4', Range, queue_size=5)
+        self.sonar0_pub = rospy.Publisher('car/sonar0', Range, queue_size=5)
+        self.sonar1_pub = rospy.Publisher('car/sonar1', Range, queue_size=5)
+        self.sonar2_pub = rospy.Publisher('car/sonar2', Range, queue_size=5)
+        self.sonar3_pub = rospy.Publisher('car/sonar3', Range, queue_size=5)
+        self.sonar4_pub = rospy.Publisher('car/sonar4', Range, queue_size=5)
         
         self.safe_ranger_0 = 0.3
         self.safe_ranger_1 = 0.6
@@ -448,12 +448,12 @@ class BaseController:
         self.voltage_bool = False
         self.voltage_val = 0
         self.voltage_status_service = rospy.Service('voltage_status', Trigger, self.handle_voltage_status) 
-	self.voltage_pub = rospy.Publisher('voltage_value', Int16, queue_size=30)
+	self.voltage_pub = rospy.Publisher('car/voltage_value', Int16, queue_size=30)
    
         self.emergencybt_bool = False
         self.emergencybt_val = 0
         self.emergencybt_status_service = rospy.Service('emergencybt_status', Trigger, self.handle_emergencybt_status) 
-        self.emergencybt_pub = rospy.Publisher('emergencybt_status', Int16, queue_size=30)
+        self.emergencybt_pub = rospy.Publisher('car/emergencybt_status', Int16, queue_size=30)
 
         rospy.Subscriber("is_passed", Int16, self.isPassedCallback)
         self.isPassed = True
@@ -759,7 +759,7 @@ class ArduinoROS():
         # Cleanup when termniating the node
         rospy.on_shutdown(self.shutdown)
         
-        self.port = rospy.get_param("~port", "/dev/ttyACM0")
+        self.port = rospy.get_param("~port", "/dev/ttyUSB0")
         self.baud = int(rospy.get_param("~baud", 57600))
         self.timeout = rospy.get_param("~timeout", 0.5)
         self.base_frame = rospy.get_param("~base_frame", 'base_link')
@@ -818,7 +818,7 @@ class ArduinoROS():
             rospy.sleep(2)
         except:
             pass
-        rospy.loginfo("Shutting down Arduino Node...")
+        rospy.loginfo("Shutting down E1 car Node...")
         
 if __name__ == '__main__':
     myArduino = ArduinoROS()

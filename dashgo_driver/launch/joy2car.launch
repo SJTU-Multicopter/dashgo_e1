@@ -1,0 +1,18 @@
+<launch>
+  <!-- joy node --> 
+  <node name="origin_joy" pkg="joy" type="joy_node" respawn="true"> 
+  <param name="dev" type="string" value="/dev/input/js0" /> 
+  <param name="deadzone" value="0.12" /> 
+  </node>
+
+  <!-- start e1-car driver node -->
+  <node name="steady_joy" pkg="dashgo_driver" type="steady_joy_control.py" output="screen" respawn="true">
+  </node>
+
+  <!-- start steady-joy node, which convert origin joy info to a steady rate topic -->
+  <param name="/use_sim_time" value="false" />
+  <node name="car" pkg="dashgo_driver" type="dashgo_driver.py" output="screen" respawn="true">
+    <rosparam file="$(find dashgo_driver)/config/my_dashgo_params.yaml" command="load" />
+  </node>
+
+</launch>

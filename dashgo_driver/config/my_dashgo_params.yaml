@@ -1,4 +1,4 @@
-port: /dev/dashgo
+port: /dev/ttyUSB0
 baud: 115200
 timeout: 0.1
 rate: 50
@@ -6,16 +6,16 @@ sensorstate_rate: 10
 
 useImu: False
 use_base_controller: True
-base_controller_rate: 10
+base_controller_rate: 30
 
 # For a robot that uses base_footprint, change base_frame to base_footprint
-base_frame: base_footprint
+base_frame: world
 
 # === Robot drivetrain parameters
 wheel_diameter: 0.162
-wheel_track: 0.330
+wheel_track: 0.326
 encoder_resolution: 730
-gear_reduction: 0.975
+gear_reduction: 0.844
 motors_reversed: False
 
 # === PID parameters
@@ -23,4 +23,4 @@ Kp: 50
 Kd: 20
 Ki: 0
 Ko: 50
-accel_limit: 1.0
+accel_limit: 0.05
